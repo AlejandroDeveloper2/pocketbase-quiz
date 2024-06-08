@@ -24,4 +24,4 @@ EXPOSE 8090
 
 COPY ./pb_data /pb/pb_data
 COPY --from=downloader /pocketbase /usr/local/bin/pocketbase
-CMD ["/usr/local/bin/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb_data", "--publicDir=/pb_public
+CMD ["/usr/local/bin/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb_data", "--publicDir=/pb_public"]
