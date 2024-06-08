@@ -18,11 +18,15 @@ RUN wget https://github.com/pocketbase/pocketbase/releases/download/v${VERSION}/
     && unzip pocketbase_${VERSION}_${BUILDX_ARCH}.zip \
     && chmod +x /pocketbase
 
+COPY pb_data /pb_data
+COPY pb_migrations /pb_migrations
+
 FROM scratch
 
 EXPOSE 8090
 
-COPY ./pb_migrations /usr/local/bin/pb_migrations
-COPY ./pb_data /usr/local/bin/pb_data
 COPY --from=downloader /pocketbase /usr/local/bin/pocketbase
-CMD ["/usr/local/bin/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/usr/local/bin/pb_data", "--dir=/usr/local/bin/pb_migrations", "--publicDir=/pb_public"]
+COPY --from=downloader /pb_migrations /pb_migrations
+COPY --from=downloader /pb_data /pb_data 
+
+CMD ["/usr/local/bin/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb_data", "--migrationsDir=/pb_migrations", "--publicDir=/pb_public"]
