@@ -29,4 +29,4 @@ COPY --from=downloader /pocketbase /usr/local/bin/pocketbase
 COPY --from=downloader /pb_migrations /pb_migrations
 COPY --from=downloader /pb_data /pb_data 
 
-CMD ["/usr/local/bin/pocketbase", "serve", "--http=0.0.0.0:8090", "--dataDir=/pb_data", "--migrationsDir=/pb_migrations", "--publicDir=/pb_public"]
+CMD ["/usr/local/bin/pocketbase", "serve", "--http=0.0.0.0:8090", "--datair=/pb_data", "--migrationsDir=/pb_migrations", "--publicDir=/pb_public"]
